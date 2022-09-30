@@ -1,65 +1,72 @@
-// license badge based on which license is passed in
-function renderLicenseBadge(license) {
-  if (license !== 'None') {
-    return `![Github license](https://img.shields.io/badge/License-${license}-blue.svg)`;
+// Include packages needed for this application
+const fs = require('fs');
+const inquirer = require('inquirer');
+const {generateMarkdown} = require('./utils/generateMarkdown');
+const path = require('path');
+
+// array of questions for user input
+const questions = [
+    {
+        type: 'input',
+        name: 'github',
+        message: 'Enter your Github username: ',
+    },
+    {
+        type: 'input',
+        name: 'email',
+        message: 'Enter your email address:',
+    },
+    {
+        type: 'input',
+        name: 'title',
+        message: 'What is your project name?',
+    },
+    {
+        type: 'input',
+        name: 'description',
+        message: 'Write a description of your project:',
+    },
+    {
+        type: 'list',
+        name: 'license',
+        message: 'What type of license should your project have?',
+        choices: ['Apache', 'MIT', 'BSD 2', 'Eclipse'],
+    },
+    {
+        type: 'input',
+        name: 'installation',
+        message: 'Install by entering:',
+        default: 'npm i',
+    },
+    {
+        type: 'input',
+        name: 'test',
+        message: 'Test by entering the below into command line:',
+        default: 'npm test',
+    },
+    {
+        type: 'input',
+        name: 'usage',
+        message: 'Please describe the use of your project.',
+    },
+    {
+        type: 'input',
+        name: 'contribute',
+        message: 'How to contribute to the repo?',
+    },
+];
+
+// Function to write README file
+function writeToFile(fileName, data) {
+    return fs.writeFileSync(path.join(process.cwd(), fileName), data);
+}
+
+// Function to initialize app
+function init() {
+    inquirer.prompt(questions).then((answers) => {
+      console.log('Generating README');
+      writeToFile('README.md', generateMarkdown(answers));
+    });
   }
-  return '';
-}
-
-// license link
-function renderLicenseLink(license) {
-  if (license !== 'None') {
-    return `\n* [License](#license)\n`;
-  }
-  return '';
-}
-
-// returns the license section of README
-function renderLicenseSection(license) {
-  if (license !== 'None') {
-    return `## License
-Project is licensed under ${license} license.`;
-  }
-  return '';
-}
-
-// generate markdown for README
-function generateMarkdown(data) {
-  return `# ${data.title}
-  ${renderLicenseBadge(data.license)}
-  ## Description
-  ${data.description}  
-  
-  ## Table of Content
-  - [Installation](#installation)
-  - [Usage](#usage)
-  - [Tests](#tests)
-  - [Contributing](#contributing)
-  - [Questions](#questions)
-  - [License](#license)
-  ## Installation
-  Install necessary dependencies by entering the below in command line:
-  \`\`\`
-  ${data.installation}
-  \`\`\`
-  ## Usage
-  ${data.usage}
-  ## Tests
-  To run a test enter below in command line:
-  \`\`\`
-  ${data.test}
-  \`\`\`
-  
-  ## Contributing
-  ${data.contributing}
-  ## Questions
-  If you have any questions regarding repo, or issues please reach me at ${data.email}. Find more of my work at [${data.github}](https://github.com/${
-    data.github
-  }/).
-  ## License
-  ${renderLicenseLink(data.license)}
-  ${renderLicenseSection(data.license)}
-`;
-}
-
-module.exports = {generateMarkdown};
+// Function call to initialize app
+init();
