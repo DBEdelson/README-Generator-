@@ -1,7 +1,7 @@
-# hi 
+# README Generator 
   ![Github license](https://img.shields.io/badge/license-MIT-blue.svg)
   ## Description
-  node   
+  Generate README  
   
   ## Table of Content
   - [Installation](#installation)
@@ -16,7 +16,7 @@
   npm i
   ```
   ## Usage
-  project 
+  README
   ## Tests
   To run a test enter below in command line:
   ```
@@ -24,7 +24,7 @@
   ```
   
   ## Contribute
-  yes 
+  Y
   ## Questions
   Please reach me at david.edelson@outlook.com. 
   Find more of my work at [dedelson](https://github.com/dedelson/).
