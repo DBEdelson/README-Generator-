@@ -11,7 +11,7 @@ View in action:
 
 https://drive.google.com/file/d/17Dc6Q4vdZ5h7bxm0YQ4wTwf8S9LtHday/view?usp=sharing
 
-![ScreenShot.png!](./Develop/images%20/README.png.png)
+![ScreenShot.png!](./Develop/images%20/README.png)
 
 Readme Gen
 
